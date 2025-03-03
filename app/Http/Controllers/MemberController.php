@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AddressType;
 use Illuminate\Http\Request;
 use App\Models\Member;
+use App\Models\Addresses;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
     public function create()
     {
-        return view('create');
+        $address_types = AddressType::getAddressTypes();
+
+        return view('create', compact('address_types')); 
+
     }
 
     public function create_process(Request $request)
@@ -20,17 +26,36 @@ class MemberController extends Controller
             'phone' => 'required|digits_between:9,15',
             'type' => 'required|in:regular,vip',
         ]);
-    
-        $member = new Member();
-        $member->name = $request->name;
-        $member->email = $request->email;
-        $member->phone = $request->phone;
-        $member->type = $request->type;
-    
-        if ($member->save()) {
+
+        try {
+            DB::beginTransaction();
+
+            $member = new Member();
+            $member->name  = $request->name;
+            $member->email = $request->email;
+            $member->phone = $request->phone;
+            $member->type  = $request->type;
+
+            if (!$member->save()) {
+                throw new \Exception('Member save failed');
+            }
+
+            $address = new Addresses();
+            $address->accid    = $member->id;
+            $address->location = $request->location;
+            $address->address_type = $request->address_type;
+            $address->remark    = '';
+
+            if (!$address->save()) {
+                throw new \Exception('Address save failed');
+            }
+
+            DB::commit();
             return response()->json(['success' => 'Submit Success']);
-        } else {
-            return response()->json(['error' => 'Submit Fail'], 500);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'Submit Fail', 'message' => $e->getMessage()], 500);
         }
     }
 

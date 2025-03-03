@@ -48,6 +48,22 @@
                     <div class="text-danger" id="typeError"></div>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Address Type</label>
+                    <select name="address_type" id="address_type" class="form-select" required>
+                        @foreach($address_types as $type)
+                            <option value="{{ $type->id }}" {{ old('address_type') == $type->id ? 'selected' : '' }}>
+                                {{ $type->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Location</label>
+                    <input type="text" name="location" id="location" class="form-control" value="{{ old('location') }}" required>
+                </div>
+
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </form>
         </div>

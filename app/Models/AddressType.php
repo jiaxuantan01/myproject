@@ -14,4 +14,11 @@ class AddressType extends Authenticatable
         'remark',
         'status',
     ];
+
+    public static function getAddressTypes(){
+
+        $data = self::where('status',1)->get();
+
+        return $data;
+    }
 }

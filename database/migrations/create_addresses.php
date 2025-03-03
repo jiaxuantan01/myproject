@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('accid');
             $table->string('location');
-            $table->string('ramark');
+            $table->string('address_type');
+            $table->string('remark');
             $table->dateTime('update_at');
             $table->dateTime('create_at');
         });
