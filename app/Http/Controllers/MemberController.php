@@ -84,7 +84,9 @@ class MemberController extends Controller
             $member = Member::where('id',$request->id)->first();
         }
 
-        return view('view', compact('member'));
+        $address_types = AddressType::getAddressTypes();
+
+        return view('view', compact('member','address_types'));
     }
 
     public function delete_process(Request $request)
@@ -103,5 +105,32 @@ class MemberController extends Controller
     
         return '';
     }
+
+    public function update_process(Request $request){    
+        try {
+            DB::beginTransaction();
+    
+            $member = Member::find($request->id);
+            if (!$member) {
+                return response()->json(['error' => 'Member not found'], 404);
+            }
+    
+            $member->update([
+                'name'  => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'type'  => $request->type,
+            ]);
+    
+            DB::commit();
+            return response()->json(['success' => 'Update Success']);
+    
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'Update Fail', 'message' => $e->getMessage()], 500);
+        }
+    }
+    
+    
     
 }

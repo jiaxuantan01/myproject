@@ -23,27 +23,27 @@
 
                 <div class="mb-3">
                     <label class="form-label">Full Name</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+                    <input type="text" name="name" id="name" class="form-control" required>
                     <div class="text-danger" id="nameError"></div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+                    <input type="email" name="email" id="email" class="form-control" required>
                     <div class="text-danger" id="emailError"></div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Phone Number</label>
-                    <input type="text" name="phone" id="phone" class="form-control" value="{{ old('phone') }}" required>
+                    <input type="text" name="phone" id="phone" class="form-control" required>
                     <div class="text-danger" id="phoneError"></div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Membership Type</label>
                     <select name="type" id="type" class="form-select" required>
-                        <option value="regular" {{ old('type') == 'regular' ? 'selected' : '' }}>Regular Member</option>
-                        <option value="vip" {{ old('type') == 'vip' ? 'selected' : '' }}>VIP Member</option>
+                        <option value="regular">Regular Member</option>
+                        <option value="vip">VIP Member</option>
                     </select>
                     <div class="text-danger" id="typeError"></div>
                 </div>
@@ -52,7 +52,7 @@
                     <label class="form-label">Address Type</label>
                     <select name="address_type" id="address_type" class="form-select" required>
                         @foreach($address_types as $type)
-                            <option value="{{ $type->id }}" {{ old('address_type') == $type->id ? 'selected' : '' }}>
+                            <option value="{{ $type->id }}">
                                 {{ $type->name }}
                             </option>
                         @endforeach
@@ -61,7 +61,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Location</label>
-                    <input type="text" name="location" id="location" class="form-control" value="{{ old('location') }}" required>
+                    <input type="text" name="location" id="location" class="form-control" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
@@ -77,7 +77,7 @@ $(document).ready(function () {
     $("#membershipForm").on("submit", function (event) {
         event.preventDefault();
 
-        let formData = $(this).serialize(); //
+        let formData = $(this).serialize();
 
         $(".text-danger").html("");
 

@@ -15,6 +15,7 @@
     <!-- Add New Button -->
     <div class="mb-3">
         <a href="{{ route('membership.create') }}" class="btn btn-success">+ Add New</a>
+        <a href="{{ route('membership.export') }}" class="btn btn-warning">Export</a>
     </div>
 
     <form method="GET" action="{{ url('/') }}" class="mb-3 d-flex align-items-center gap-3">
