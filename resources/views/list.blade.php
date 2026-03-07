@@ -9,6 +9,8 @@
 </head>
 <body>
 
+@include('layouts.header')
+
 <div class="container mt-4">
     <h2 class="mb-4">Member List</h2>
 
@@ -19,7 +21,7 @@
     </div>
 
     <form method="GET" action="{{ url('/') }}" class="mb-3 d-flex align-items-center gap-3">
-    
+
         <!-- search -->
         <div class="input-group">
             <input type="text" name="search" class="form-control" placeholder="Search members..." value="{{ request('search') }}">
@@ -93,9 +95,9 @@
         if (page < 1) page = 1;
         if (page > maxPage) page = maxPage;
 
-        console.log("Max Page:", maxPage); 
+        console.log("Max Page:", maxPage);
         console.log("Selected Page:", page);
-        
+
         window.location.href = "page=" + page;
     });
 
@@ -103,7 +105,7 @@
         let perPage = this.value;
         let params = new URLSearchParams(window.location.search);
         params.set('perPage', perPage);
-        params.delete('page'); 
+        params.delete('page');
 
         window.location.href =  '?' + params.toString();
     });

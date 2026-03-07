@@ -10,6 +10,10 @@
 
 <div class="container mt-4">
     <h2 class="mb-4">Member Details #{{ $member->id }}</h2>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
     <div class="card">
         @if ($member)
             <form id="membershipForm">
@@ -70,7 +74,7 @@ $(document).ready(function () {
         let formData = $(this).serialize();
 
         $.ajax({
-            url: "{{ route('membership.update_process') }}", 
+            url: "{{ route('membership.update_process') }}",
             type: "POST",
             data: formData,
             dataType: "json",
