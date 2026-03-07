@@ -8,12 +8,10 @@
 </head>
 <body>
 
+@include('layouts.header')
+
 <div class="container mt-4">
     <h2 class="mb-4">Member Details #{{ $member->id }}</h2>
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
     <div class="card">
         @if ($member)
             <form id="membershipForm">

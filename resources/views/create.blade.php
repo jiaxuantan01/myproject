@@ -6,6 +6,9 @@
     <title>Membership Application</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
+@include('layouts.header')
+
 <body>
     <div class="container mt-5">
         <div class="card shadow-lg p-4">
@@ -87,7 +90,7 @@ $(document).ready(function () {
             data: formData,
             success: function (response) {
                 $("#message").html('<div class="alert alert-success">Submit Success</div>');
-                $("#membershipForm")[0].reset(); 
+                $("#membershipForm")[0].reset();
             },
             error: function (xhr) {
                 $("#message").html('<div class="alert alert-danger">Submit Fail</div>');

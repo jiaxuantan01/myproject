@@ -15,11 +15,6 @@ class AuthController extends Controller
 
     public function login_process(Request $request)
     {
-        $request->validate([
-            'name'     => 'required|string',
-            'password' => 'required|string',
-        ]);
-
         $credentials = $request->only('name','password');
 
         if (Auth::attempt($credentials)) {

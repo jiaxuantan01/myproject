@@ -14,7 +14,7 @@ class MemberController extends Controller
     {
         $address_types = AddressType::getAddressTypes();
 
-        return view('create', compact('address_types')); 
+        return view('create', compact('address_types'));
 
     }
 
@@ -62,17 +62,17 @@ class MemberController extends Controller
     public function list(Request $request)
     {
         $query = Member::query();
-    
+
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
-    
+
         $sortBy = request('sortBy', 'id');
         $sortOrder = request('sortOrder', 'asc');
         $perPage = request('perPage', 10);
-        
+
         $members = $query->orderBy($sortBy, $sortOrder)->paginate($perPage);
-    
+
         return view('list', compact('members', 'sortBy', 'sortOrder', 'perPage'));
     }
 
@@ -91,46 +91,81 @@ class MemberController extends Controller
 
     public function delete_process(Request $request)
     {
-        
+
         if (!$request->has('id')) {
             return response()->json(['error' => 'No Found ID'], 404);
         }
-    
+
         $member = Member::find($request->id);
         if (!$member) {
             return response()->json(['error' => 'No Found Member'], 404);
         }
-    
+
         $member->delete();
-    
+
         return '';
     }
 
-    public function update_process(Request $request){    
+    public function update_process(Request $request){
         try {
             DB::beginTransaction();
-    
+
             $member = Member::find($request->id);
             if (!$member) {
                 return response()->json(['error' => 'Member not found'], 404);
             }
-    
+
             $member->update([
                 'name'  => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'type'  => $request->type,
             ]);
-    
+
             DB::commit();
             return response()->json(['success' => 'Update Success']);
-    
+
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => 'Update Fail', 'message' => $e->getMessage()], 500);
         }
     }
-    
-    
-    
+
+    public function export()
+    {
+        $members = Member::all(); // 如果你有过滤条件，可以用相同 query
+
+        $filename = 'members_' . date('Y-m-d_H-i-s') . '.csv';
+
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename={$filename}",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $columns = ['ID','Name','Email','Phone','Type','Created At'];
+
+        $callback = function() use ($members, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($members as $member) {
+                fputcsv($file, [
+                    $member->id,
+                    $member->name,
+                    $member->email,
+                    $member->phone,
+                    $member->type,
+                    $member->create_at,
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
 }

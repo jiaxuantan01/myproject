@@ -43,12 +43,54 @@
     <!-- Member Table -->
     <table class="table table-bordered">
     <thead>
-        <tr>
-            <th><a href="{{ request()->fullUrlWithQuery(['sortBy' => 'id', 'sortOrder' => $sortBy == 'id' && $sortOrder == 'asc' ? 'desc' : 'asc']) }}">ID</a></th>
-            <th><a href="{{ request()->fullUrlWithQuery(['sortBy' => 'name', 'sortOrder' => $sortBy == 'name' && $sortOrder == 'asc' ? 'desc' : 'asc']) }}">Name</a></th>
-            <th><a href="{{ request()->fullUrlWithQuery(['sortBy' => 'email', 'sortOrder' => $sortBy == 'email' && $sortOrder == 'asc' ? 'desc' : 'asc']) }}">Email</a></th>
-            <th>Actions</th>
-        </tr>
+    <tr>
+        <th style="width: 100px">
+            <a href="{{ request()->fullUrlWithQuery(['sortBy' => 'id', 'sortOrder' => $sortBy == 'id' && $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                ID
+                @if($sortBy == 'id')
+                    {!! $sortOrder == 'asc' ? '&#9650;' : '&#9660;' !!}
+                @endif
+            </a>
+        </th>
+
+        <th style="width: 300px">
+            <a href="{{ request()->fullUrlWithQuery(['sortBy' => 'name', 'sortOrder' => $sortBy == 'name' && $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                Name
+                @if($sortBy == 'name')
+                    {!! $sortOrder == 'asc' ? '&#9650;' : '&#9660;' !!}
+                @endif
+            </a>
+        </th>
+
+        <th style="width: 300px">
+            <a href="{{ request()->fullUrlWithQuery(['sortBy' => 'email', 'sortOrder' => $sortBy == 'email' && $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                Email
+                @if($sortBy == 'email')
+                    {!! $sortOrder == 'asc' ? '&#9650;' : '&#9660;' !!}
+                @endif
+            </a>
+        </th>
+
+        <th style="width: 200px">
+            <a href="{{ request()->fullUrlWithQuery(['sortBy' => 'phone', 'sortOrder' => $sortBy == 'phone' && $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                Phone
+                @if($sortBy == 'phone')
+                    {!! $sortOrder == 'asc' ? '&#9650;' : '&#9660;' !!}
+                @endif
+            </a>
+        </th>
+
+        <th style="width: 200px">
+            <a href="{{ request()->fullUrlWithQuery(['sortBy' => 'type', 'sortOrder' => $sortBy == 'type' && $sortOrder == 'asc' ? 'desc' : 'asc']) }}">
+                Type
+                @if($sortBy == 'type')
+                    {!! $sortOrder == 'asc' ? '&#9650;' : '&#9660;' !!}
+                @endif
+            </a>
+        </th>
+
+        <th style="width: 200px">Actions</th>
+    </tr>
     </thead>
         <tbody>
             @forelse ($members as $member)
@@ -56,6 +98,8 @@
                     <td>{{ $member->id }}</td>
                     <td>{{ $member->name }}</td>
                     <td>{{ $member->email }}</td>
+                    <td>{{ $member->phone }}</td>
+                    <td>{{ $member->type }}</td>
                     <td>
                         <a href="{{ url('/view?id=' . $member->id) }}" class="btn btn-sm btn-info">View / Edit</a>
                         <a href="javascript:void(0)" data-id="{{ $member->id }}" class="btn btn-sm btn-danger delete-btn">Delete</a>
