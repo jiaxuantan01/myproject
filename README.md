@@ -31,6 +31,11 @@ Clone the repository:
 ```bash
 git clone https://github.com/jiaxuantan01/myproject.git
 
-![img1](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img1.png)
-![img1](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img2.png)
-![img1](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img2.png)
+### Login Page
+![login](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img1.png)
+
+### Dashboard
+![dashboard](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img2.png)
+
+### Member System
+![members](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img3.png)
