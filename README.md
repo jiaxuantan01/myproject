@@ -31,4 +31,6 @@ Clone the repository:
 ```bash
 git clone https://github.com/jiaxuantan01/myproject.git
 
-![img1.png](public%2Fimage%2Fimg1.png)
+![img1](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img1.png)
+![img1](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img2.png)
+![img1](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img2.png)
