@@ -1,3 +1,5 @@
+
+
 # Member Management System
 
 A simple backend-focused member management system built with Laravel and MySQL.
@@ -30,12 +32,13 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/jiaxuantan01/myproject.git
+```
 
-### Login Page
-![login](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img1.png)
+# Login Page
+<img src="https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img1.png" width="700"/>
 
-### Dashboard
-![dashboard](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img2.png)
+# Dashboard
+<img src="https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img2.png" width="700"/>
 
-### Member System
-![members](https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img3.png)
+# Member System
+<img src="https://raw.githubusercontent.com/jiaxuantan01/myproject/main/public/image/img3.png" width="700"/>
