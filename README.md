@@ -30,3 +30,8 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/jiaxuantan01/myproject.git
+
+
+![img1.png](img1.png)
+![img2.png](img2.png)
+![img2.png](img3.png)
